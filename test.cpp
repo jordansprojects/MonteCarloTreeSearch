@@ -2,7 +2,7 @@
 
 int main(){
 
-
+	Tree t;
 
 	return 0;
 }
