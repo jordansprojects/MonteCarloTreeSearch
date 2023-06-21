@@ -19,7 +19,6 @@ struct TreeNode {
 	
 	private:
 		std::vector<TreeNode*> children;
-		template <typename T>
 		T data;
 
 		constexpr static double C = 1.41421356237; 	// This is approximately the square root of 2 
@@ -32,14 +31,12 @@ struct TreeNode {
 		
 
 	public:
-		template <typename T>
 		TreeNode(T data){
-				
 				// all values start at zero
 				wins = n = N = 0;
 
 				// initialize vector 
-				children = std::vector();
+				children = std::vector<TreeNode<T>*>();
 			}
 		TreeNode() = delete;
 
@@ -65,13 +62,13 @@ struct TreeNode {
 template <typename T>
 class Tree {
 	public:
+		TreeNode<T> *root;
 		Tree() = delete;
-		template <typename T>
 		Tree(T rootData){
-			*root =  new TreeNode(rootData);	
+			*root =  new TreeNode<T>(rootData);	
 		}
 		void runMCTS(double wins, double totalSimulations){}
-		TreeNode<T> *root;
+		
 
 		void print(){
 			print(this->root);
@@ -86,15 +83,15 @@ class Tree {
 		* referenced GeeksforGeeks for this function
 		* https://www.geeksforgeeks.org/remove-all-leaf-nodes-from-a-generic-tree-or-n-ary-tree/
 		*/
-		TreeNode * deleteAll(TreeNode *root){
-			if ( root == NULL) return NULL;
+		TreeNode<T> * deleteAll(TreeNode<T> *root){
+			if ( root == nullptr) return nullptr;
 			if (root->children.size() == 0){
 				delete root;
-				return NULL;
+				return nullptr;
 			}
 			// loop through all current roots children
 			for ( int i = 0; i < root->children.size(); i++){
-				TreeNode *child = root->children[i];
+				TreeNode<T> *child = root->children[i];
 
 				// if this child has no children, delete it
 				if(child->children.size() == 0){

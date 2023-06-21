@@ -9,12 +9,16 @@
 
 /* Action must be implemented */
 struct Action{
+	virtual void print() = 0;	
+	
 };
 
 class Gamestate{
 	public :
-		virtual void getReward() = 0;
-		virtual std::vector<Action> getActions()= 0;		
+	 
+	    /* reward is only calculated for terminal states*/ 
+		virtual int getReward() = 0;
+		virtual std::vector<Action*> getActions()= 0;		
 };
 
 #endif
