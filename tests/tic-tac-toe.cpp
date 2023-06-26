@@ -6,13 +6,15 @@
 #include "..\tree.h"
 #include "..\gamestate.h"
 
+#include <cstdlib> /* for rand() */ 
+#include<time.h> /* for time */ 
 #include <iostream>
 
 class TicTacToeBoard : Gamestate{
 	private:
 	std::vector<Action*> actions;
-	char* board = new char[DIM*DIM];
 	const int DIM = 3;
+	char* board = new char[DIM*DIM];
 	public:
 	TicTacToeBoard(){		
 		for ( int i = 0; i < DIM*DIM; i++)
@@ -44,21 +46,39 @@ class TicTacToeBoard : Gamestate{
 	}
 }; // end of class TicTacToeboard
 
-
 struct TicTacToeAction: Action {
-	char who; /* This will either be an 'x' or an 'o' */ 
-	int putIndex; /*where to place the 'x' or 'o' */
+	char who; 	/* This will either be an 'x' or an 'o' */ 
+	int putIndex; 	/* where to place the 'x' or 'o' */
 	void print(){
+		std::cout << "who = " << who << " at index = " << putIndex << '\n';
 	}
 
 };
 
+
+void runTicTacToeGame(){
+	TicTacToeBoard gameBoard;
+
+	// randomly select who is x and who is o
+	srand(time(NULL));
+	int playerKey = (rand() +1) % 2 ;
+	char player = ( playerKey == 0 ) ? 'x' : 'o' ;
+	char monteCarlo = (( 1 - playerKey ) == 0) ? 'x' : 'o';
+	
+        std::cout << "player= " << player << '\n';	
+	std::cout<< "monteCarlo= "<<monteCarlo << '\n';
+
+	while (true){
+		std::cout << " Board :\n";
+		gameBoard.printBoard();
+		return;
+	}
+}
+
+
 int main(){
-
-
-	TicTacToeBoard b;
-	b.printBoard();
-
+	// run game 
+	runTicTacToeGame();
 	std::cout<< "Tests Successful.\n";
 	return 0;
 }

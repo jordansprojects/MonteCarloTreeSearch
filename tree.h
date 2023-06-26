@@ -67,7 +67,9 @@ class Tree {
 		Tree(T rootData){
 			*root =  new TreeNode<T>(rootData);	
 		}
-		void runMCTS(double wins, double totalSimulations){}
+		void runMCTS(double wins, double totalSimulations){
+		
+		}
 		
 
 		void print(){
